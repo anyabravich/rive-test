@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rive bag interaction</title>
+    <script src="https://unpkg.com/@rive-app/webgl@2.0.0"></script>
+    <style>
+      body {
+        margin: auto;
+        background: #eee;
+      }
+      canvas {
+        border: 1px solid #ccc;
+        cursor: pointer;
+        border-radius: 6px;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      li {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <canvas
+          class="riveCanvas"
+          width="500"
+          height="500"
+          data-file="./bag.riv"
+          data-mathine="bag"
+        ></canvas>
+      </li>
+      <li>
+        <canvas
+          class="riveCanvas"
+          width="500"
+          height="500"
+          data-file="./new_file.riv"
+          data-mathine="State Machine 1"
+        ></canvas>
+      </li>
+      <li>
+        <canvas
+          class="riveCanvas"
+          width="500"
+          height="500"
+          data-file="./pseudo_3d_button.riv"
+          data-mathine="State Machine 1"
+        ></canvas>
+      </li>
+    </ul>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.querySelectorAll(".riveCanvas");
+
+        canvas.forEach((canvas) => {
+          const src = canvas.dataset.file;
+          const machine = canvas.dataset.mathine;
+
+          const riveInstance = new rive.Rive({
+            src,
+            canvas,
+            stateMachines: [machine],
+            autoplay: true,
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
